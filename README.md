@@ -265,7 +265,6 @@ def format_record(rec: tuple):
         print(f'{str(name[0])} {str(initials[1])}., гр. {str(group)}, GPA {grade}')
 
 test1 = ("Иванов Иван Иванович", "BIVT-25", 4.6)
-test1 = ("Иванов Иван Иванович", "BIVT-25", 4.6)
 test2 = ("Петров Пётр", "IKBO-12", 5.0)
 test3 = ("Петров Пётр Петрович", "IKBO-12", 5.0)
 test4 = ("  сидорова  анна   сергеевна ", "ABB-01", 3.999)
