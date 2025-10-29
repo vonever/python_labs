@@ -275,3 +275,124 @@ for item in test_list:
 ```
 
 ![13_tuples](/images/13_tuples.png)
+
+## Лабораторная работа 3
+
+### Задание 1
+
+```python
+import re
+from src.lib.text import *
+
+print(normalize("ПрИвЕт\nМИр\t"))
+print(normalize("ёжик, Ёлка", yo2e=True))
+print(normalize("Hello\r\nWorld"))
+print(normalize("  двойные   пробелы  "))
+
+
+print(tokenize("привет мир"))
+print(tokenize("hello,world!!!"))
+print(tokenize("по-настоящему круто"))
+print(tokenize("2025 год"))
+print(tokenize("emoji 😀 не слово"))
+
+print(top_n(count_freq(["a", "b", "a", "c", "b", "a"]), n=2))
+print(top_n(count_freq(["bb", "aa", "bb", "aa", "cc"]), n=2))
+```
+
+![A](/images/21_A.png)
+
+### Задание 2
+
+```python
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from src.lib.text import *
+
+text = sys.stdin.read()     
+textn = text
+
+text = tokenize(normalize(text))
+textn = text
+top = top_n(count_freq(text), n = 5)
+text = top_n(count_freq(text))
+
+print(f"Всего слов: {len(textn)}")
+print(f"Уникальных слов: {len(text)}")
+print("Топ-5:")
+for word, count in top:
+    print(f"{word}: {count}")
+```
+
+![text_stats](/images/22_text_stats.png)
+
+## Лабораторная работа 4
+
+### Задание 1
+
+```python
+import csv
+from pathlib import Path
+from typing import Iterable, Sequence
+
+def read_text(path: str | Path, encording: str = "utf-8") -> str:
+    p = Path(path)
+    if p.exists() == False:
+        raise FileNotFoundError
+    if len(p.read_text(encoding = encording)) <= 0:
+        return '' 
+    
+    return p.read_text(encoding = encording)
+
+def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...] | None = None) -> None:
+    p = Path(path)
+    rows = list(rows)
+    for i in range (len(rows)-1):
+        if len(rows[i]) != len(rows[i+1]):
+            raise ValueError
+    with p.open("w", newline="", encoding="utf-8-sig") as f:
+        w = csv.writer(f)
+        if header is not None:
+            w.writerow(header)
+        for r in rows:
+            w.writerow(r)
+```
+
+### Задание 2
+
+```python
+from src.lab04.io_txt_csv import *
+from src.lib.text import *
+
+#A
+a = read_text("C:\\VSprojects\\python_labs\\data\\lab04\\input.txt")
+a = top_n(count_freq(tokenize(normalize(a))))
+
+write_csv(
+    rows = a, 
+    path = "C:\\VSprojects\\python_labs\\data\\lab04\\report.csv",
+    header = ["Word","Count"]  
+)
+
+#B
+b = read_text("C:\\VSprojects\\python_labs\\data\\lab04\\input.txt")
+b = tokenize(normalize(b))
+b1 = b
+b = count_freq(b)
+top = top_n(b,5)
+b = top_n(b)
+
+write_csv(
+    rows = b, 
+    path = "C:\\VSprojects\\python_labs\\data\\lab04\\report.csv",
+    header=["Word","Count"]
+)
+
+print(f"Всего слов: {len(b1)}")
+print(f"Уникальных слов: {len(b)}")
+print("Топ-5:")
+for word, count in top:
+    print(f"{word}: {count}")
+```
+
