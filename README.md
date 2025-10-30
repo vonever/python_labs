@@ -329,7 +329,7 @@ for word, count in top:
 
 ## Лабораторная работа 4
 
-### Задание 1
+
 
 ```python
 import csv
@@ -359,24 +359,24 @@ def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...
             w.writerow(r)
 ```
 
-### Задание 2
+
 
 ```python
 from src.lab04.io_txt_csv import *
 from src.lib.text import *
 
 #A
-a = read_text("C:\\VSprojects\\python_labs\\data\\lab04\\input.txt")
+a = read_text("/Users/wheatley0004/Desktop/python_labs/data/lab04/input.txt")
 a = top_n(count_freq(tokenize(normalize(a))))
 
 write_csv(
     rows = a, 
-    path = "C:\\VSprojects\\python_labs\\data\\lab04\\report.csv",
+    path = "/Users/wheatley0004/Desktop/python_labs/data/lab04/report.csv",
     header = ["Word","Count"]  
 )
 
 #B
-b = read_text("C:\\VSprojects\\python_labs\\data\\lab04\\input.txt")
+b = read_text("/Users/wheatley0004/Desktop/python_labs/data/lab04/input.txt")
 b = tokenize(normalize(b))
 b1 = b
 b = count_freq(b)
@@ -385,7 +385,7 @@ b = top_n(b)
 
 write_csv(
     rows = b, 
-    path = "C:\\VSprojects\\python_labs\\data\\lab04\\report.csv",
+    path = "/Users/wheatley0004/Desktop/python_labs/data/lab04/report.csv",
     header=["Word","Count"]
 )
 
@@ -395,4 +395,26 @@ print("Топ-5:")
 for word, count in top:
     print(f"{word}: {count}")
 ```
+### Задание A
 
+![text_report_Aterminal](/images/31_text_report_terminal.png)
+
+![text_report_Ainput](/images/31_text_report_input.png)
+
+![text_report_Acsv](/images/31_text_report_csv.png)
+
+### Задание B
+
+![text_report_Bterminal](/images/32_text_report_terminal.png)
+
+![text_report_Binput](/images/32_text_report_input.png)
+
+![text_report_Bcsv](/images/32_text_report_csv.png)
+
+### Задание C
+
+![text_report_Cterminal](/images/33_text_report_terminal.png)
+
+![text_report_Cinput](/images/33_text_report_input.png)
+
+![text_report_Ccsv](/images/33_text_report_csv.png)
