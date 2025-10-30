@@ -329,7 +329,7 @@ for word, count in top:
 
 ## Лабораторная работа 4
 
-
+### io_txt_csv
 
 ```python
 import csv
@@ -359,7 +359,7 @@ def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...
             w.writerow(r)
 ```
 
-
+### text_report
 
 ```python
 from src.lab04.io_txt_csv import *
