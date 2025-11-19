@@ -539,3 +539,118 @@ csv_to_xlsx("data/lab05/samples/people.csv","data/lab05/out/people.xlsx")
 ![csv_sample](/images/41_json-csv_1.png)
 
 ![csv_out](/images/42_csv-xlsx.png)
+
+## Лабораторная работа 6
+
+### Задание 1
+
+```python
+import sys
+sys.path.append("/Users/wheatley0004/Desktop/python_labs")
+import argparse
+from src.lib.text import count_freq, tokenize, normalize, top_n
+from pathlib import Path
+
+
+def main():
+    parser = argparse.ArgumentParser(description="CLI‑утилиты лабораторной №6")
+    subparsers = parser.add_subparsers(dest="command")
+
+    cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
+    cat_parser.add_argument("--input", required=True)
+    cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки")
+
+    stats_parser = subparsers.add_parser("stats", help="Частоты слов")
+    stats_parser.add_argument("--input", required=True)
+    stats_parser.add_argument("--top", type=int, default=5)
+
+    args = parser.parse_args()
+
+    if args.command == "cat":
+        """Реализация команды cat"""
+
+        with Path(args.input).open("r", newline="", encoding="utf8") as f:
+            people = f.read()
+            list_p = people.split()
+
+        count = 0
+
+        if args.n:
+            for peo in list_p:
+                count += 1
+                print(f"{count} {peo}")
+
+        else:
+            for peo in list_p:
+                print(f"{peo}")
+
+    elif args.command == "stats":
+        """Реализация команды stats"""
+
+        with Path(args.input).open("r", newline="", encoding="utf8") as f:
+            people = f.read()
+
+        final = top_n(count_freq(tokenize(normalize(people))), args.top)
+
+        for word, count in final:
+            print(f"{word}: {count}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+![cat](/images/51_cat.png)
+
+![stats](/images/51_stats.png)
+
+### Задание 2
+
+```python
+import sys
+sys.path.append("/Users/wheatley0004/Desktop/python_labs")
+import argparse
+from src.lab05.json_csv import json_to_csv, csv_to_json
+from src.lab05.csv_xlsx import csv_to_xlsx
+from pathlib import Path
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Конвертеры данных")
+    sub = parser.add_subparsers(dest="cmd")
+
+    p1 = sub.add_parser("json2csv")
+    p1.add_argument("--in", dest="input", required=True)
+    p1.add_argument("--out", dest="output", required=True)
+
+    p2 = sub.add_parser("csv2json")
+    p2.add_argument("--in", dest="input", required=True)
+    p2.add_argument("--out", dest="output", required=True)
+
+    p3 = sub.add_parser("csv2xlsx")
+    p3.add_argument("--in", dest="input", required=True)
+    p3.add_argument("--out", dest="output", required=True)
+
+    args = parser.parse_args()
+
+    """
+        Вызываем код в зависимости от аргументов.
+    """
+
+    if args.cmd == "json2csv":
+        json_to_csv(Path(args.input), Path(args.output))
+
+    elif args.cmd == "csv2json":
+        csv_to_json(Path(args.input), Path(args.output))
+
+    elif args.cmd == "csv2xlsx":
+        csv_to_xlsx(Path(args.input), Path(args.output))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+![json2csv](/images/52_json2csv.png)
+
+![csv2json](/images/52_csv2json.png)
