@@ -1,0 +1,73 @@
+## Лабораторная работа 8
+
+### Входной JSON
+
+```json
+[
+  {
+    "fio": "Ivanov Ivan Ivanovich",
+    "birthdate": "2000-05-15",
+    "group": "SE-01",
+    "gpa": 4.2
+  },
+  {
+    "fio": "Petrova Maria Sergeevna",
+    "birthdate": "1999-12-03",
+    "group": "SE-02",
+    "gpa": 3.8
+  },
+  {
+    "fio": "Sidorov Alexey Dmitrievich",
+    "birthdate": "2001-08-22",
+    "group": "SE-01",
+    "gpa": 4.5
+  },
+  {
+    "fio": "Kozlova Ekaterina Vladimirovna",
+    "birthdate": "2000-02-29",
+    "group": "SE-03",
+    "gpa": 4.0
+  }
+]
+```
+
+### Выходной JSON
+
+```json
+[
+  {
+    "fio": "Ivanov Ivan Ivanovich",
+    "birthdate": "2000-05-15",
+    "group": "SE-01",
+    "gpa": 4.2
+  },
+  {
+    "fio": "Petrova Maria Sergeevna",
+    "birthdate": "1999-12-03",
+    "group": "SE-02",
+    "gpa": 3.8
+  },
+  {
+    "fio": "Sidorov Alexey Dmitrievich",
+    "birthdate": "2001-08-22",
+    "group": "SE-01",
+    "gpa": 4.5
+  },
+  {
+    "fio": "Kozlova Ekaterina Vladimirovna",
+    "birthdate": "2000-02-29",
+    "group": "SE-03",
+    "gpa": 4.0
+  }
+]
+```
+
+### Результаты
+
+#### Функция сериализации
+
+![models](/images/71_models.png)
+
+#### Тестовые примеры
+
+![test_examples](/images/72_test_examples.png)
